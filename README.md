@@ -1,6 +1,6 @@
-<div style="width: inline; text-align: center; padding: 10px;">
-    <img style="width: 100px;" src="http://peteletrica.uff.br/wp-content/uploads/sites/509/2021/09/Python-logo-notext.svg_.png">
-    <img style="width: 100px;" src="https://paulogala.com.br/wp-content/uploads/2018/08/robo.png">
+<div style="text-align: center; padding: 10px;">
+    <img style="width: 100px; padding: 15px" src="http://peteletrica.uff.br/wp-content/uploads/sites/509/2021/09/Python-logo-notext.svg_.png">
+    <img style="width: 100px; padding: 15px" src="https://paulogala.com.br/wp-content/uploads/2018/08/robo.png">
 </div>
 
 <p style="text-align: center;">  

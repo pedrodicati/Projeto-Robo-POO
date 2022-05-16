@@ -1,3 +1,6 @@
+import os
+from platform import system
+
 from typing import List
 from robot import Robot, fighterRobot, medicalRobot
 # from robotFighter import fighterRobot
@@ -13,20 +16,29 @@ def criaRobo() -> None:
 
     if tipo == 1:
         print("Tipo escolhido: ROBÔ")
-        name = str(input("Digite o nome do sue novo robô: "))
+        name = str(input("Digite o nome do seu novo robô: "))
         listaRobots.append(Robot(name))
     elif tipo == 2:
         print("Tipo escolhido: ROBÔ LUTADOR")
-        name = str(input("Digite o nome do sue novo robô: "))
+        name = str(input("Digite o nome do seu novo robô: "))
         listaRobots.append(fighterRobot(name))
     elif tipo == 3:
         print("Tipo escolhido: ROBÔ MÉDICO")
-        name = str(input("Digite o nome do sue novo robô: "))
+        name = str(input("Digite o nome do seu novo robô: "))
         listaRobots.append(medicalRobot(name))
 
 def listaRobot() -> None:
     for i in range(len(listaRobots)):
         print(f"ID: {i}\n{listaRobots[i]}\n")
+
+def casamentoRobot() -> None:
+    listaRobot()
+
+    idParceiro1 = int(input("Digite o ID do primeiro robô para o casamento: "))
+    idParceiro2 = int(input("Digite o ID do parceiro para o casamento: "))
+
+    listaRobots.append(listaRobots[idParceiro1] + listaRobots[idParceiro2])
+
 
 if __name__ == "__main__":
     conditionWhile = True
@@ -39,11 +51,15 @@ if __name__ == "__main__":
     listaRobots.append(a)
     listaRobots.append(b)
     
+    if system() == 'Windows':
+        os.system("cls")
+    else:
+        os.system("clear")
+
     while (conditionWhile == True):
-        listaRobot()
         print("MENU")
         print("1 - Criar robôs")
-        print("2 - Lista robôs")
+        print("2 - Listar robôs existentes")
         print("3 - Casamento de robôs (gera um filho robô)")
         print("4 - Luta")
         print("0 - Sair do programa")
@@ -55,7 +71,7 @@ if __name__ == "__main__":
         elif menu == 2:
             listaRobot()
         elif menu == 3:
-            pass
+            casamentoRobot()
         elif menu == 4:
             pass
         elif menu == 0:
@@ -69,6 +85,3 @@ if __name__ == "__main__":
     # listaRobot()
 
     # print(listaRobots[3])
-
-    criaRobo()
-    listaRobot()

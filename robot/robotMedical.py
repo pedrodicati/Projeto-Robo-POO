@@ -8,10 +8,7 @@ class medicalRobot(Robot):
         self.__poderDeCura = random.random()
     
     def __repr__(self) -> str:
-        return f"{super().__repr__()}\nPoder de cura: {self.__poderDeCura:.2f}"
-
-    # def __add__(self, parceiro: Robot) -> Robot:
-    #     return super().__add__(self, parceiro)
+        return f"{super().__repr__()}\nPoder de cura: {self.__poderDeCura:.3f}"
 
     def curar(self, precisaCura: Robot) -> bool:
         if self.vida() >= precisaCura.vida():

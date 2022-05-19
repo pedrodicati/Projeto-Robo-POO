@@ -36,11 +36,6 @@ def criaRobo() -> None:
     print("\nRobô criado! Confira na lista para verificar suas informações\n\n")
 
 def listaRobot() -> None:
-    if system() == 'Windows':
-        os.system("cls")
-    else:
-        os.system("clear")
-
     for i in range(len(listaRobots)):
         print(f"ID: {i}\n{listaRobots[i]}\n")
 
@@ -57,17 +52,57 @@ def casamentoRobot() -> None:
 
     listaRobots.append(listaRobots[idParceiro1] + listaRobots[idParceiro2])
 
-    print("\nCasamento realizado com sucesso. O robô gerado possui por conta do casamento tem nome da forma descrita abaixo:")
-    print(f"{listaRobots[idParceiro1].getNome()}-{listaRobots[idParceiro1].getNome()}\n\n")
+    print(f"\nCasamento realizado com sucesso. O robô gerado tem nome: {listaRobots[idParceiro1].nome}-{listaRobots[idParceiro2].nome}")
 
 def lutaRobot() -> None:
+    if system() == 'Windows':
+        os.system("cls")
+    else:
+        os.system("clear")
+
+    print("===== BATALHA =====")
+    print("Chegou a hora da batalha!!\n")
+    sleep(2.0)
+
     for i in range(len(listaRobots)):
         if listaRobots[i].__class__ == fighterRobot:
-            print(listaRobots[i])
+            print(f"ID = {i}\n{listaRobots[i]}")
 
-    print("Para atacar o robô só pode ser do tipo LUTADOR")    
-    # idLutador1 = int(input("Escolha um robô lutador para atacar"))
+    print("\nPara atacar, o robô deve ser do tipo fighterRobot!")
+    idAtacante = int(input("Escolha o ID de um robô lutador para atacar: "))
 
+    if system() == 'Windows':
+        os.system("cls")
+    else:
+        os.system("clear")
+
+    print("===== BATALHA =====")
+    print("Agora é a hora de escolher quem será a vítima, pode ser qualquer tipo de robô!\n")    
+    sleep(2.0)
+
+    listaRobot()
+    idAtacado  = int(input("\nEscolha o ID de quem o lutador irá atacar: "))
+ 
+    listaRobots[idAtacante].atacar(listaRobots[idAtacado])
+
+    if listaRobots[idAtacado].__class__ == fighterRobot: # se o robô que foi atacado for lutador também
+        print("\nA vítima foi atacada e aqui está a atualização da vida dela:")
+        print(f"{listaRobots[idAtacado]}\n")
+        
+        print("Porém a vítima é do tipo lutador também, então haverá contra-ataque")
+        sleep(2.0)
+
+        listaRobots[idAtacado].atacar(listaRobots[idAtacante])
+
+        sleep(2.0)
+
+        print("Atualização das informações após contra-ataque:")
+        print(f"{listaRobots[idAtacante]}\n\n")
+
+        sleep(2.0)
+    else:
+        print("\nA vítima foi atacada e aqui está a atualização da vida dela:")
+        print(f"{listaRobots[idAtacado]}\n\n")
 
 if __name__ == "__main__":
     conditionWhile = True
@@ -86,7 +121,6 @@ if __name__ == "__main__":
         os.system("clear")
 
     while (conditionWhile == True):
-
         print("MENU")
         print("1 - Criar robôs")
         print("2 - Listar robôs existentes")
@@ -94,12 +128,17 @@ if __name__ == "__main__":
         print("4 - Luta")
         print("0 - Sair do programa")
 
-        menu = int(input("Digite o número da operação que deseja realizar: "))
+        menu = int(input("\nDigite o número da operação que deseja realizar: "))
 
         if menu == 1:
             criaRobo()
         elif menu == 2:
             listaRobot()
+            if system() == 'Windows':
+                os.system("cls")
+            else:
+                os.system("clear")
+
             print("\n")
         elif menu == 3:
             casamentoRobot()

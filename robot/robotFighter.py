@@ -10,10 +10,28 @@ class fighterRobot(Robot):
         self.__poder = random.uniform(self.__danoMaximo, 1)
 
     def __repr__(self) -> str:
-        return f"{super().__repr__()}\nPoder = {self.__poder:.2f}"
+        return f"{super().__repr__()}\nPoder = {self.__poder:.3f}"
 
-    def atacar(self, atacado: Robot):
-        atacado.setVida(atacado.getVida() * (1 - self.__poder))
+    @property
+    def poder(self) -> float:
+        return self.__poder
 
-    def contraAtaque(self, quemAtacou: Robot):
+    def atacar(self, atacado: Robot) -> None:
+        descontaVida = 1 - self.poder
+
+        novaVida = atacado.vida * descontaVida
+
+        atacado.vida = novaVida
+
+    def contraAtaque(self, quemAtacou: Robot) -> None:
         pass
+
+if __name__ == "__main__":
+    r = Robot("paranaue")
+    r2 = fighterRobot("sasa")
+
+    print(f"{r}\n\n{r2}")
+
+    r2.atacar(r)
+
+    print(f"\n{r}\n\n{r2}")

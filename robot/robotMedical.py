@@ -11,10 +11,10 @@ class medicalRobot(Robot):
         return f"{super().__repr__()}\nPoder de cura: {self.__poderDeCura:.3f}"
 
     def curar(self, precisaCura: Robot) -> bool:
-        if self.vida() >= precisaCura.vida():
-            vida = precisaCura.vida()
+        if self.vida >= precisaCura.vida:
+            vida = precisaCura.vida
             vida += self.__poderDeCura
-            precisaCura.setVida(vida)
+            precisaCura.vida = vida
             return True
         else:
             print("Impossível curar, vida do médico é pouca para curar")

@@ -1,11 +1,10 @@
 import random
 
 class Robot:
-    __nivelCritico: float
+    __nivelCritico = 0.10
 
     def __init__(self, nome: str) -> None:
         self.__nome         = nome
-        self.__nivelCritico = 0.20
         self.__vida         = random.random()
 
     def __repr__(self) -> str:
@@ -19,7 +18,7 @@ class Robot:
         return type(self)(nomePai + '-' + nomeParceiro)
 
     def precisaDeMedico(self):
-        if self.vida() < self.__nivelCritico:
+        if self.vida < self.__nivelCritico:
             return True
         else:
             return False
@@ -40,4 +39,3 @@ class Robot:
     @property
     def nome(self):
         return self.__nome
-    

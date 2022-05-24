@@ -22,16 +22,3 @@ class fighterRobot(Robot):
         novaVida = atacado.vida * descontaVida
 
         atacado.vida = novaVida
-
-    def contraAtaque(self, quemAtacou: Robot) -> None:
-        pass
-
-if __name__ == "__main__":
-    r = Robot("paranaue")
-    r2 = fighterRobot("sasa")
-
-    print(f"{r}\n\n{r2}")
-
-    r2.atacar(r)
-
-    print(f"\n{r}\n\n{r2}")

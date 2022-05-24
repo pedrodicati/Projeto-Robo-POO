@@ -1,7 +1,7 @@
 import os
-from random import random, randint
-from secrets import choice
 
+from random import randint
+from secrets import choice
 from time import sleep
 from platform import system
 
@@ -9,11 +9,14 @@ from robot.robot import Robot
 from robot.robotMedical import medicalRobot
 from robot.robotFighter import fighterRobot
 
-def criaRobo() -> None:
-    if system() == 'Windows':   
+def clear(): # função para limpar a tela
+    if system() == 'Windows':
         os.system("cls")
     else:
         os.system("clear")
+
+def criaRobo() -> None:
+    clear()
 
     print("Existem 3 tipos de robôs:")
     print("1 - Robô")
@@ -22,6 +25,7 @@ def criaRobo() -> None:
 
     tipo = int(input("\nDigite o número do tipo do robô que deseja criar: "))
 
+    # seleciona o tipo do robo, cria o nome e coloca na lista dos robôs
     if tipo == 1:
         print("\nTipo escolhido: ROBÔ")
         name = str(input("Digite o nome do seu novo robô: "))
@@ -37,46 +41,37 @@ def criaRobo() -> None:
 
     print("\nRobô criado! Confira na lista para verificar suas informações\n\n")
 
-def listaRobot() -> None:
+def listaRobot() -> None: # listar todos os robôs
     for i in range(len(robots)):
         print(f"ID: {i}\n{robots[i]}\n")
 
 def casamentoRobot() -> None:
-    if system() == 'Windows':
-        os.system("cls")
-    else:
-        os.system("clear")
-
+    clear()
     listaRobot()
 
     idParceiro1 = int(input("Digite o ID do primeiro robô para o casamento: "))
     idParceiro2 = int(input("Digite o ID do parceiro para o casamento: "))
 
-    robots.append(robots[idParceiro1] + robots[idParceiro2])
+    novoRobo = robots[idParceiro1] + robots[idParceiro2] # cria um novo robô com o nome definido dos pais
+    robots.append(novoRobo) # coloca o novo robo na lista
 
-    print(f"\nCasamento realizado com sucesso. O robô gerado tem nome: {robots[idParceiro1].nome}-{robots[idParceiro2].nome}")
+    print(f"\nCasamento realizado com sucesso. O robô gerado tem nome: {novoRobo.nome}\n\n")
 
 def lutaRobot() -> None:
-    if system() == 'Windows':
-        os.system("cls")
-    else:
-        os.system("clear")
+    clear()
 
     print("===== BATALHA =====")
     print("Chegou a hora da batalha!!\n")
     sleep(2.0)
 
-    for i in range(len(robots)):
+    for i in range(len(robots)):    # imprime só os fighterRobots
         if robots[i].__class__ == fighterRobot:
-            print(f"ID = {i}\n{robots[i]}")
+            print(f"ID = {i}\n{robots[i]}\n")
 
-    print("\nPara atacar, o robô deve ser do tipo fighterRobot!")
-    idAtacante = int(input("Escolha o ID de um robô lutador para atacar: "))
+    print("Para atacar, o robô deve ser do tipo fighterRobot!")
+    idAtacante = int(input("Escolha o ID de um robô lutador para atacar: ")) # guarda o id de quem vai atacar
 
-    if system() == 'Windows':
-        os.system("cls")
-    else:
-        os.system("clear")
+    clear()
 
     print("===== BATALHA =====")
     print("Agora é a hora de escolher quem será a vítima, pode ser qualquer tipo de robô!\n")    
@@ -85,65 +80,53 @@ def lutaRobot() -> None:
     listaRobot()
     idAtacado  = int(input("\nEscolha o ID de quem o lutador irá atacar: "))
  
-    robots[idAtacante].atacar(robots[idAtacado])
+    robots[idAtacante].atacar(robots[idAtacado]) # o atacante ataca
 
-    if robots[idAtacado].__class__ == fighterRobot: # se o robô que foi atacado for lutador também
-        print("\nA vítima foi atacada e aqui está a atualização da vida dela:")
+    if robots[idAtacado].__class__ == fighterRobot: # contra-ataque caso o atacado for lutador também
+        print("\nA vítima foi atacada e aqui está a atualização da vida dela:\n")
         print(f"{robots[idAtacado]}\n")
         
-        print("Porém a vítima é do tipo lutador também, então haverá contra-ataque")
+        print("\nPorém a vítima é do tipo lutador também, então haverá contra-ataque")
         sleep(2.0)
 
-        robots[idAtacado].atacar(robots[idAtacante])
+        robots[idAtacado].atacar(robots[idAtacante]) # contra-ataque
 
         sleep(2.0)
 
-        print("Atualização das informações após contra-ataque:")
+        print("\nAtualização das informações após contra-ataque:\n")
         print(f"{robots[idAtacante]}\n\n")
-
-    else:
-        print("\nA vítima foi atacada e aqui está a atualização da vida dela:")
+    else:   # caso não for do tipo lutador só mostra a atualização da vida
+        print("\nA vítima foi atacada e aqui está a atualização da vida dela:\n")
         print(f"{robots[idAtacado]}\n\n")
 
 
 def doctorHeal() -> None:
-    listaIdDoctor = list()    
+    listaIdDoctor = list()  # cria uma lista dos médicos vazia
     for i in range(len(robots)):
         if robots[i].__class__ == medicalRobot:
             listaIdDoctor.append(i) # cria uma lista com todos os IDs dos robôs médicos
 
-    print(f"{listaIdDoctor}\n")
-
     for i in range(0, len(robots)):
-        if robots[i].precisaDeMedico():
-            print(robots[i].precisaDeMedico(), "\n", robots[i])
-
-            if(randint(0, 1) == 1): # 50% de chance de ser atendido ou não
-                robots[choice(listaIdDoctor)].curar(robots[i]) # choice sorteia um valor aleatório da lista
-                print("\nFoi 1\nCurado com sucesso porra\n")
-            else:
-                print(f"\nFoi zero\n")
-        else:   
-            print("\nNenhum robô precisa de médico")
+        if robots[i].precisaDeMedico(): # se o robô precisar de médico retorna NULL
+            if(randint(0, 1) == 1):     # 50% de chance de ser atendido ou não
+                robots[choice(listaIdDoctor)].curar(robots[i]) # choice sorteia um robô aleatório da 
 
 
 if __name__ == "__main__":
     robots = list()
     
-    m = Robot("l")
-    m.vida = 0.01
-    a = fighterRobot('trot')
-    b = medicalRobot('saosao')
+    m = Robot("Rob")
+    a = fighterRobot('Falcon')
+    b = medicalRobot('Saosao')
     robots.append(m)
     robots.append(a)
     robots.append(b)
     
-    if system() == 'Windows':
-        os.system("cls")
-    else:
-        os.system("clear")
+    clear()
 
     while(True):
+        doctorHeal() # sempre verifica se um robô precisa ser curado e cura automaticamente
+
         print("MENU")
         print("1 - Criar robôs")
         print("2 - Listar robôs existentes")
@@ -156,10 +139,7 @@ if __name__ == "__main__":
         if menu == 1:
             criaRobo()
         elif menu == 2:
-            if system() == 'Windows':
-                os.system("cls")
-            else:
-                os.system("clear")
+            clear()
             listaRobot()
         elif menu == 3:
             casamentoRobot()
@@ -167,5 +147,3 @@ if __name__ == "__main__":
             lutaRobot()
         elif menu == 0:
             break
-        elif menu == 5:
-            doctorHeal()

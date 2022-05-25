@@ -8,9 +8,13 @@
 ## Tópicos
 
 :small_blue_diamond: [Descrição do Projeto](#descrição-do-projeto)
+
 :small_blue_diamond: [Funcionalidades](#funcionalidades)
+
 :small_blue_diamond: [Pré-Requisitos](#pré-requisitos)
+
 :small_blue_diamond: [Como rodar a aplicação](#como-rodar-a-aplicação)
+
 :small_blue_diamond: [Executando o programa](#executando-o-programa)
 
 ## Descrição do Projeto
@@ -22,9 +26,13 @@
 ## Funcionalidades
 
 :heavy_check_mark: Classes robô, robô-lutador e robô-médico
+
 :heavy_check_mark: Criação dos robôs
+
 :heavy_check_mark: Listagem dos robôs
+
 :heavy_check_mark: Casamento de robôs
+
 :heavy_check_mark: Batalha entre robôs
 
 ## Pré-Requisitos
@@ -58,7 +66,7 @@ Ao executar o [main.py](main.py), irá para o menu:
 MENU
 1 - Criar robôs
 2 - Listar robôs existentes
-3 - Casamento de robôs (gera um filho robô)asamento de robôs (gera um filho robô)
+3 - Casamento de robôs (gera um filho robô)
 4 - Luta
 0 - Sair do programa
 
